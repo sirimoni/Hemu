@@ -7,13 +7,14 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: linear-gradient(135deg, #ffdde1, #ff9a9e, #fad0c4);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* CENTER CONTENT */
 .container {
     text-align: center;
     color: white;
@@ -22,32 +23,29 @@ body {
 
 h1 {
     font-size: 3.5rem;
-    text-shadow: 0 0 15px rgba(255, 0, 100, 0.8);
-    animation: glow 2s infinite alternate;
+    animation: glowText 2s infinite alternate;
 }
 
 p {
     margin-top: 15px;
     font-size: 1.4rem;
-    opacity: 0.9;
 }
 
 button {
     margin-top: 25px;
-    padding: 12px 30px;
+    padding: 14px 35px;
     font-size: 1.1rem;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     background: #ff4d6d;
     color: white;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
 }
 
 button:hover {
     transform: scale(1.1);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
 
 .message {
@@ -57,67 +55,114 @@ button:hover {
     animation: fadeIn 1.5s ease-in-out;
 }
 
-@keyframes glow {
-    from {
-        text-shadow: 0 0 10px #ff4d6d;
-    }
-    to {
-        text-shadow: 0 0 30px #fff;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Floating Hearts */
+/* FLOATING HEARTS */
 .heart {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
     background: red;
     transform: rotate(45deg);
-    animation: float 6s linear infinite;
-    opacity: 0.8;
+    animation: float 7s linear infinite, pulse 2s infinite;
+    opacity: 0.95;
+    box-shadow:
+        0 0 10px rgba(255,77,109,0.8),
+        0 0 25px rgba(255,77,109,0.6),
+        0 0 45px rgba(255,77,109,0.4);
 }
 
 .heart::before,
 .heart::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
     background: inherit;
     border-radius: 50%;
 }
 
 .heart::before {
-    top: -10px;
+    top: -17px;
     left: 0;
 }
 
 .heart::after {
-    left: -10px;
+    left: -17px;
     top: 0;
 }
 
+/* BIG HEART */
+.big-heart {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: #ff4d6d;
+    transform: rotate(45deg);
+    display: none;
+    animation: bigPulse 2s infinite;
+    box-shadow:
+        0 0 30px rgba(255,77,109,0.9),
+        0 0 70px rgba(255,120,170,0.7),
+        0 0 120px rgba(255,120,170,0.6);
+}
+
+.big-heart::before,
+.big-heart::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.big-heart::before {
+    top: -80px;
+    left: 0;
+}
+
+.big-heart::after {
+    left: -80px;
+    top: 0;
+}
+
+/* FIREWORKS */
+.firework {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+    pointer-events: none;
+}
+
+/* ANIMATIONS */
 @keyframes float {
-    0% {
-        transform: translateY(100vh) rotate(45deg);
+    0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+}
+
+@keyframes pulse {
+    50% { transform: rotate(45deg) scale(1.15); }
+}
+
+@keyframes bigPulse {
+    50% { transform: rotate(45deg) scale(1.1); }
+}
+
+@keyframes explode {
+    to {
+        transform: translate(var(--x), var(--y)) scale(0);
         opacity: 0;
     }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-10vh) rotate(45deg);
-        opacity: 0;
-    }
+}
+
+@keyframes glowText {
+    from { text-shadow: 0 0 10px #ff4d6d; }
+    to { text-shadow: 0 0 30px white; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
