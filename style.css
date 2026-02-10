@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 
-/* CENTER CONTENT */
+/* Center content */
 .container {
     text-align: center;
     color: white;
@@ -23,12 +23,13 @@ body {
 
 h1 {
     font-size: 3.5rem;
-    animation: glowText 2s infinite alternate;
+    animation: glow 2s infinite alternate;
 }
 
 p {
     margin-top: 15px;
     font-size: 1.4rem;
+    opacity: 0.9;
 }
 
 button {
@@ -38,9 +39,9 @@ button {
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    background: #ff4d6d;
+    background: #ff1e4d;
     color: white;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     transition: transform 0.3s;
 }
 
@@ -55,85 +56,75 @@ button:hover {
     animation: fadeIn 1.5s ease-in-out;
 }
 
-/* FLOATING HEARTS */
+/* BIG RED GLOWING HEARTS */
 .heart {
     position: absolute;
-    width: 35px;
-    height: 35px;
-    background: red;
+    width: 40px;
+    height: 40px;
+    background: #ff1e4d;
     transform: rotate(45deg);
-    animation: float 7s linear infinite, pulse 2s infinite;
+    animation: float 7s linear infinite;
     opacity: 0.95;
     box-shadow:
-        0 0 10px rgba(255,77,109,0.8),
-        0 0 25px rgba(255,77,109,0.6),
-        0 0 45px rgba(255,77,109,0.4);
+        0 0 12px rgba(255, 30, 77, 0.9),
+        0 0 30px rgba(255, 30, 77, 0.7),
+        0 0 55px rgba(255, 30, 77, 0.5);
 }
 
 .heart::before,
 .heart::after {
     content: '';
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     background: inherit;
     border-radius: 50%;
 }
 
 .heart::before {
-    top: -17px;
+    top: -20px;
     left: 0;
 }
 
 .heart::after {
-    left: -17px;
+    left: -20px;
     top: 0;
 }
 
-/* BIG HEART */
-.big-heart {
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    background: #ff4d6d;
-    transform: rotate(45deg);
-    display: none;
-    animation: bigPulse 2s infinite;
-    box-shadow:
-        0 0 30px rgba(255,77,109,0.9),
-        0 0 70px rgba(255,120,170,0.7),
-        0 0 120px rgba(255,120,170,0.6);
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+    }
 }
 
-.big-heart::before,
-.big-heart::after {
-    content: '';
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    background: inherit;
-    border-radius: 50%;
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #ff1e4d;
+    }
+    to {
+        text-shadow: 0 0 30px #ffffff;
+    }
 }
 
-.big-heart::before {
-    top: -80px;
-    left: 0;
-}
-
-.big-heart::after {
-    left: -80px;
-    top: 0;
-}
-
-/* FIREWORKS */
-.firework {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    animation: explode 1s ease-out forwards;
-    pointer-events: none;
-}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}}
 
 /* ANIMATIONS */
 @keyframes float {
